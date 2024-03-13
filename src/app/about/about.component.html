@@ -1,0 +1,67 @@
+<!-- [ngClass]="formStatus" -->
+<div class="mx-auto bg-light form-section shadow-lg">
+<h1 class="text-center">Reactive Form</h1>
+<form class="mt-4 mx-auto" [formGroup]="reactiveForm" (ngSubmit)="OnFormSubmitted()"> 
+
+    <label>Username:</label> <br>
+    <input type="text" class="form-control shadow-none"  placeholder="Username" formControlName="username" /> <br>
+    <div class="err-msg mb-3">
+        <small *ngIf="reactiveForm.get('username').errors?.['required'] && reactiveForm.get('username').touched">*Username is required</small>
+        <small *ngIf="reactiveForm.get('username').errors?.['checkUserName']">*Username already exists</small>
+    </div> 
+
+    <label>Email:</label> <br>
+    <input type="email" class="form-control shadow-none" placeholder="Email" formControlName="email" /> <br/> 
+    <div class="err-msg mb-4">
+        <small *ngIf="reactiveForm.get('email').errors?.['required'] && reactiveForm.get('email').touched">*Email is required</small>
+        <small *ngIf="reactiveForm.get('email').errors?.['noSpaceAllowed'] && reactiveForm.get('email').touched">*No space allowed</small>
+    </div> 
+
+    <label>Password:</label> <br>
+    <input type="password" class="form-control shadow-none" placeholder="Password" formControlName="password" /> <br/> 
+    <div class="err-msg mb-3">
+        <small *ngIf="reactiveForm.get('password').errors?.['required'] && reactiveForm.get('password').touched">*Password is required</small>
+        <small *ngIf="reactiveForm.get('password').errors?.['noSpaceAllowed'] && reactiveForm.get('password').touched">*No space allowed</small>
+    </div>
+
+    <label>Gender:</label> <br>
+    <input type="radio" id="male" value="male" formControlName="gender" /><label class="me-5 ms-2">Male</label>
+    <input type="radio" id="female" value="female" formControlName="gender" /><label class="me-5 ms-2">Female</label>
+    <input type="radio" id="other" value="other" formControlName="gender" /><label class="me-5 ms-2">Other</label> <br> <br>
+
+    <label>Hobbies:</label> <br>
+    <input type="checkbox" id="singing" value="Singing" (change)="onHobbyChange($event)" [checked]="reactiveForm.get('hobbies').value.includes('Singing')" /><label class="me-5 ms-2">Singing</label>
+    <input type="checkbox" id="gaming" value="Gaming" (change)="onHobbyChange($event)" [checked]="reactiveForm.get('hobbies').value.includes('Gaming')" /><label class="me-5 ms-2">Gaming</label>
+    <input type="checkbox" id="sports" value="Sports" (change)="onHobbyChange($event)" [checked]="reactiveForm.get('hobbies').value.includes('Singing')" /><label class="me-5 ms-2">Sports</label> <br> <br>
+
+    <label>Skills:</label> <br>
+    <div class="input-box" formArrayName="skills">
+        <div class="d-flex" *ngFor="let control of reactiveForm.get('skills')['controls']; let i = index">
+            <input type="text" 
+              class="form-control shadow-none mb-3" 
+              placeholder="Add Skills..."
+              [formControlName]="i" >
+            <button type="button" class="btn btn-danger mx-2 mb-3" (click)="deleteSkill(i)">Delete</button>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-dark" (click)="addSkills()">Add Skills</button> <br> <br>
+
+    <input type="submit" value="submit" class="btn btn-primary btn-lg mb-4">
+    <!-- [disabled]="!reactiveForm.valid || !checkboxSelected"  -->
+
+</form>
+</div>
+
+<div class="d-flex justify-content-center mt-5 demo">
+    <div class="border border-dark border-1 p-5 rounded bg-light" [hidden]="!formSubmitted">
+
+        <p>Username: {{ formdata.username }}</p> 
+        <p>Email: {{ formdata.email }}</p> 
+        <p>Password: {{ formdata.password }}</p> 
+        <p>Gender: {{ formdata.gender }}</p> 
+        <p>Hobbies: {{ formdata.hobbies }}</p> 
+        <p>Skills: {{ formdata.skills }}</p> 
+      
+    </div>
+</div>

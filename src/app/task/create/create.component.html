@@ -1,0 +1,27 @@
+<h1 class="text-center">{{ isEditMode ? 'Update Task' : 'Create a new Task' }}</h1>
+<form class="mt-4 mx-auto" #taskForm="ngForm" (ngSubmit)="CreateOrUpdateTask(taskForm)"> 
+
+    <label for="">Title:</label>
+    <input type="text" name="title" class="form-control shadow-none"  placeholder="Title" ngModel required /> <br>
+   
+    <label for="">Description:</label>
+    <input type="text" name="desc" class="form-control shadow-none" placeholder="Description" ngModel required /> <br/> 
+    
+    <label for="">Assigned To:</label>
+    <input type="text" name="assignedTo" class="form-control shadow-none" placeholder="Assigned To" ngModel required /> <br/> 
+
+    <label for="">Created At:</label>
+    <input type="date" name="createdAt" class="form-control shadow-none" ngModel required /> <br/> 
+
+    <label for="">Status:</label>
+    <select class="form-control" name="status" ngModel>
+        <option hidden>Status</option>
+        <option value="open">Open</option>
+        <option value="started">Started</option>
+        <option value="in-progress">In Progress</option>
+        <option value="complete">Complete</option>
+    </select> <br>
+
+    <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
+
+</form>

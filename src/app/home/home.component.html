@@ -1,0 +1,46 @@
+<h1 class="text-center">Template Driven Form</h1>
+<form (ngSubmit)="onClickSubmit(registrationForm)" #registrationForm="ngForm" class="mt-4 mx-auto"> 
+
+    <input type="text" name="username" class="form-control shadow-none"  placeholder="Username" #uname="ngModel" ngModel required /> <br>
+    <div class="err-msg mb-3">
+        <small *ngIf="uname.invalid && uname.touched">*Username is required</small>
+    </div>
+    <input type="email" name="email" class="form-control shadow-none" placeholder="Email" #email="ngModel" ngModel required email /> <br/> 
+    <div class="err-msg mb-3">
+        <small *ngIf="email.invalid && email.touched">*Email is required</small>
+    </div>
+    <input type="password" name="password" class="form-control shadow-none" placeholder="Password" #password="ngModel" ngModel required /> <br/> 
+    <div class="err-msg mb-3">
+        <small *ngIf="password.invalid && password.touched">*password is required</small>
+    </div>
+
+    <label>Gender:</label> <br>
+    <div class="gen-option d-flex">
+        <div class="gender" *ngFor="let gender of genders">
+            <input type="radio" name="gender" [id]="gender.id" [value]="gender.value" ngModel required />
+            <label class="me-5 ms-2">{{ gender.display }}</label>
+        </div> 
+    </div> <br>
+
+    <label>Hobbies:</label> <br>
+    <div class="gen-option d-flex">
+        <div *ngFor="let value of checkboxValues">
+            <input type="checkbox" id="{{value}}" name="{{ value }}" [(ngModel)]="selectedValues[value]" (change)="updateButtonState()" ngModel required /> 
+            <label class="me-5 ms-2">{{value}}</label>
+        </div>
+    </div> <br>
+
+
+    <input type="submit" value="submit" class="btn btn-primary" [disabled]="(!(registrationForm.valid) && !(isAtLeastOneChecked))"> 
+
+</form>
+
+<div class="d-flex justify-content-center mt-5 demo">
+    <div class="border border-dark border-1 p-5 rounded bg-light" [hidden]="!formSubmitted">
+        <p #name>Username: {{ username }}</p> 
+        <p #mail>Email: {{ emailAddress }}</p> 
+        <p #mail>Password: {{ pass }}</p> 
+        <p #gen>Gender: {{ gender }}</p> 
+        <p #check>Hobbies: {{ selectedCheckValues }}</p> 
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="main bg-light">
+    <!-- <button (click)="showData($event)" class="btn btn-primary mb-2" value="Button">Click here!</button> <br>
+    <input type="text" (input)="onNameChange($event)"> <br>
+    <p>Hello {{name}}</p>
+    <p [class]="myCSSClass">myCSSClass</p> <br>
+    <p [class.red]="applyCSSClass">applyCSSClass</p> <br>
+    <input type="text" [(ngModel)]="userName" />
+    <p>Two way binding! Hello {{ userName }}!</p> -->
+    
+    <div class="text-center" hidden> 
+        {{ timeChange | async }} <br>
+        {{ presentDate | date:'dd MMM, yyyy hh:mm:ss' }} <br>
+        {{ 1000 | currency:'INR' }} <br>
+        {{ ["Apple","Orange","Grapes","Mango","Kiwi","Pomegranate"] | slice:2:5 }}
+     </div>
+     <div class="text-center">
+      <button class="btn btn-primary" (click)="onSubscribe()">Subscribe Now</button>
+     </div>
+
+    <hr><h3 class="text-center bg-primary text-white py-3 ">Products</h3><hr>
+
+    <app-search (valueEmitter)="handleValue($event)"></app-search>
+
+    <div class="d-flex flex-wrap ps-4">
+        <div *ngFor="let product of products; index as i;">
+          <div *ngIf="(product.name.toLowerCase()).includes(searchText.toLowerCase())">
+              <div class="border p-3 m-3 rounded border-dark-subtle shadow-sm bg-white">
+                <img [src]="product.pImage" width="100" height="200" alt="" class="mx-auto d-block">
+                <p>Product Name: {{product.name}}</p>
+                <p>Price: ${{product.price}}</p>
+                <p>Color: {{product.color}}</p>
+                <p>After Discount: ${{ (product.price - (product.price * product.discount / 100)).toFixed(2) }}</p>
+                <p [ngStyle]="{color: product.inStock > 0 ? 'Green' : 'Red'}">{{ product.inStock > 0 ? 'Only ' + product.inStock + ' product left' : 'Not in stock' }}</p>
+                <button routerLink="/shop/details/{{ product.id }}" class="btn btn-outline-primary me-5" [disabled]="!(product.inStock > 0)">Buy Now</button>
+                <button (click)="decCartValue(product.name)" class="btn btn-outline-danger" [disabled]="!(product.inStock > 0)">-</button>
+                <span class="p-2" >{{product.cart}}</span>
+                <button (click)="incCartValue(product.name)" class="btn btn-outline-success" [disabled]="!(product.inStock > 0)">+</button>
+              </div>
+          </div>
+        </div>
+    </div>
+
+</div>

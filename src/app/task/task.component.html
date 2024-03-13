@@ -1,0 +1,34 @@
+<div class="main">
+    
+    <a class="btn btn-primary link" routerLink="/createTask">Create Task</a>
+    <!-- <app-create></app-create> -->
+
+    <button class="btn btn-danger delAll" (click)="DeleteAllTasks()">Delete All Tasks</button>
+    <table class="table table-bordered border-secondary table-hover mx-auto">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Assigned To</th>
+                <th>Created At</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tbody" *ngFor="let task of allTasks">
+            <tr>
+                <td [ngClass]="'task-'+task.status">{{task.title}}</td>
+                <td [ngClass]="'task-'+task.status">{{task.desc}}</td>
+                <td [ngClass]="'task-'+task.status">{{task.assignedTo}}</td>
+                <td [ngClass]="'task-'+task.status">{{task.createdAt}}</td>
+                <td [ngClass]="'task-'+task.status">{{task.status}}</td>
+                <td [ngClass]="'task-'+task.status"> 
+                    <button class="btn btn-dark me-3" routerLink="/createTask/{{ task.id }}">Update</button> 
+                    <button class="btn btn-danger" (click)="DeleteTask(task.id)">Delete</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

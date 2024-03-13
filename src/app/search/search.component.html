@@ -1,0 +1,9 @@
+
+<div class="container w-sm-100">
+    <form class="d-flex" role="search">
+      <input class="form-control me-2 shadow-none" type="text" #searchText placeholder="Search products..." aria-label="Search" (input)="emitValue(searchText)" >
+    </form>
+    <div class="my-4"><h5><strong>Search result for : </strong>{{ searchText.value }}</h5></div>
+</div>
+
+<!-- [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" -->

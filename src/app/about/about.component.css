@@ -1,0 +1,51 @@
+h1 {
+    margin-top: 2rem;
+}
+
+form {
+    width: 30rem;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid rgb(232, 2, 2);
+}
+input.ng-invalid.ng-dirty {
+    border: 1px solid rgb(232, 2, 2);
+}
+input.ng-pending {
+    border: 1px solid orange;
+}
+
+.err-msg{
+    margin-top: -1.4rem;
+}
+small {
+    color: rgb(232, 2, 2);
+    font-weight: bold;
+}
+
+.form-section {
+    width: 35rem;
+    margin-top: 6rem;
+    border-radius: 1rem;
+    border: 1px solid rgb(167, 165, 165);
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+/* .form-section.VALID {
+    border: 2px solid green;
+}
+
+.form-section.INVALID {
+    border: 2px solid red;
+}
+
+.form-section.PENDING {
+    border: 2px solid orange;
+}  */
+
+
+

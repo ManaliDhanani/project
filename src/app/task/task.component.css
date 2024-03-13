@@ -1,0 +1,47 @@
+.main {
+    padding-top: 6rem;
+    padding-left: 3rem;
+}
+.link {
+    position: absolute;
+    margin-top: 4rem;
+    left: 24rem;
+}
+.delAll{
+    position: absolute;
+    right: 21rem;
+    margin-top: 4rem;
+    padding: 0.5rem 1.2rem;
+}
+table {
+    width: 65%;
+    font-size: 1.2rem;
+    margin-top: 7rem;
+}
+table tr{
+    height: 3rem;
+}
+td {
+    text-align: center;
+}
+th {
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+.task-complete {
+    background-color: rgb(227, 249, 227);
+}
+
+.task-open {
+    background-color: rgb(252, 231, 231);
+}
+
+.task-in-progress {
+    background-color: rgb(250, 238, 216);
+}
+
+.task-started {
+    background-color: rgb(222, 242, 250);
+}
