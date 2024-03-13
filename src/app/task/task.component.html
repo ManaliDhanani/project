@@ -1,7 +1,6 @@
 <div class="main">
     
     <a class="btn btn-primary link" routerLink="/createTask">Create Task</a>
-    <!-- <app-create></app-create> -->
 
     <button class="btn btn-danger delAll" (click)="DeleteAllTasks()">Delete All Tasks</button>
     <table class="table table-bordered border-secondary table-hover mx-auto">
@@ -27,8 +26,9 @@
                     <button class="btn btn-danger" (click)="DeleteTask(task.id)">Delete</button>
                 </td>
             </tr>
-
         </tbody>
     </table>
 
 </div>
+
+
