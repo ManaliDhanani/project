@@ -14,7 +14,7 @@
     <input type="date" name="createdAt" class="form-control shadow-none" ngModel required /> <br/> 
 
     <label for="">Status:</label>
-    <select class="form-control" name="status" ngModel>
+    <select class="form-control" name="status" ngModel required>
         <option hidden>Status</option>
         <option value="open">Open</option>
         <option value="started">Started</option>
@@ -22,6 +22,6 @@
         <option value="complete">Complete</option>
     </select> <br>
 
-    <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
 
 </form>

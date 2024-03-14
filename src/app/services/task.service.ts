@@ -10,9 +10,7 @@ import { map } from 'rxjs';
 
 export class TaskService {
 
-    http: HttpClient = inject(HttpClient);
-
-    constructor(public router: Router){}
+    constructor(public router: Router, private http: HttpClient){}
 
     CreateTask(task: Task){
         this.http.post<{name: string}>('https://angularhttpclient-d6c80-default-rtdb.firebaseio.com/tasks.json',task)

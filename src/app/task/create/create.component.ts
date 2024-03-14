@@ -17,11 +17,13 @@ export class CreateComponent {
   selectedTask: Task;
   @ViewChild('taskForm') taskForm: NgForm;
 
-  taskService: TaskService = inject(TaskService);
+  // taskService: TaskService = inject(TaskService);
 
-  constructor(public router: Router, private route: ActivatedRoute){}
-
-  http: HttpClient = inject(HttpClient);
+  constructor(
+    public router: Router, 
+    public route: ActivatedRoute, 
+    public taskService: TaskService
+  ){}
 
   CreateOrUpdateTask(form: NgForm){
     if(!this.isEditMode){

@@ -20,10 +20,12 @@ import { SubjectComponent } from './observable/subject/subject.component';
 import { TaskComponent } from './task/task.component';
 import { CreateComponent } from './task/create/create.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch:'full' },
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'login', pathMatch:'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'shop/details/:id', component:DetailsComponent  },
@@ -51,7 +53,8 @@ const routes: Routes = [
     ShowTaskComponent,
     SubjectComponent,
     TaskComponent,
-    CreateComponent
+    CreateComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

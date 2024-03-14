@@ -1,0 +1,28 @@
+h2 {
+    margin-top: 2rem;
+}
+
+form {
+    width: 26rem;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid rgb(232, 2, 2);
+}
+
+.form-section {
+    width: 32rem;
+    margin-top: 12rem;
+    border-radius: 1rem;
+    border: 1px solid rgb(167, 165, 165);
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+.err-msg {
+    color: red;
+    font-weight: 500;
+    font-size: large;
+}
