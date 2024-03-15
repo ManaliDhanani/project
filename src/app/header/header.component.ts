@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { SubscribeService } from '../services/subscribe.service';
 import { AuthService } from '../services/auth.service';
 import { User } from '../Model/User';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,25 +10,28 @@ import { User } from '../Model/User';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit, OnDestroy{
 
-  constructor(private subService: SubscribeService){}
+  constructor(
+    private subService: SubscribeService, 
+    public authService: AuthService,
+  ){}
 
-  authService: AuthService = inject(AuthService);
+  isLoggedIn: boolean = false;
+  private userSubject: Subscription;
 
-  isLoggedIn:boolean = false;
-
-  ngOnInit(){
-    this.authService.user.subscribe((user: User) => {
+  ngOnInit() {
+    this.userSubject = this.authService.user.subscribe((user: User) => {
       this.isLoggedIn = user ? true : false;
-      
-    })
+    });
+  }
+
+  ngOnDestroy(){
+    this.userSubject.unsubscribe();
   }
   
   onSubscribe(){
     this.subService.onSubscribeClick('monthly');
   }
-
-
 
 }

@@ -7,14 +7,14 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto me-3">
-              <a class="nav-link active me-3 text-white" routerLink="home">Home</a>
-              <a class="nav-link active me-3 text-white" routerLink="shop">Shop</a>
-              <a class="nav-link active me-3 text-white" routerLink="about">About</a>
-              <a class="nav-link active me-3 text-white" routerLink="task">Task</a>
-              <a class="nav-link active me-3 text-white" routerLink="observable">Observable</a>
-              <a class="nav-link active me-3 text-white" routerLink="service">Services</a>
-              <a class="btn btn-primary" routerLink="/login">Login</a>
-              <a class="btn btn-primary" routerLink="/login">Logout</a>
+              <a class="nav-link active me-3 text-white" *ngIf="isLoggedIn" routerLink="home">Home</a>
+              <a class="nav-link active me-3 text-white" *ngIf="isLoggedIn" routerLink="shop">Shop</a>
+              <a class="nav-link active me-3 text-white" *ngIf="isLoggedIn" routerLink="about">About</a>
+              <a class="nav-link active me-3 text-white" *ngIf="isLoggedIn" routerLink="task">Task</a>
+              <a class="nav-link active me-3 text-white" *ngIf="isLoggedIn" routerLink="observable">Observable</a>
+              <a class="nav-link active me-3 text-white" *ngIf="isLoggedIn" routerLink="service">Services</a>
+              <a class="btn btn-primary" *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+              <a class="btn btn-primary" *ngIf="isLoggedIn" routerLink="/login">Logout</a>
             </div>
             <div class="me-5">
               <!-- <button class="btn btn-primary" (click)="onSubscribe()">Subscribe Now</button> -->

@@ -10,13 +10,15 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  // don't show navbar in login page in angular and i have defind my routes in app.module.ts file 
   hideNavbar = true;
   authService: AuthService = inject(AuthService);
   isLoginMode: Boolean = true;
   errorMessage: string | null = null;
 
-  router: Router = inject(Router);
+  // router: Router = inject(Router);
+
+  constructor(public router: Router){}
+
 
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
@@ -29,7 +31,8 @@ export class LoginComponent {
     if(this.isLoginMode){
       this.authService.login(email, password).subscribe({
         next: (res) => { 
-          console.log(res);
+          console.log("response",res);
+          
           this.router.navigate(['/home']);
         },
         error: (errMsg) => { 
