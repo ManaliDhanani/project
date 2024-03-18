@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { tap } from 'rxjs';
+import { User } from '../Model/User';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +11,20 @@ import { tap } from 'rxjs';
 })
 export class HomeComponent implements OnInit{
 
-  userName: string;
-  // user: { username: string, phoneNumber: string };
+  userName: any;
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
 
     const currentUser = this.authService.user.value;
-    this.userName = currentUser ? currentUser.displayName : '';
+    console.log(currentUser);
+    this.userName = currentUser ? currentUser.name : '';
+    
+    // const currentUser = this.authService.user.value;
+    // console.log("currentUser",currentUser);
+    // // 
+    // this.userName = currentUser ? currentUser.name : '';
     
     // this.userName = this.authService.user;
     // console.log("username",this.userName);

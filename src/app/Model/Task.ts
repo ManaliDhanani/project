@@ -1,10 +1,14 @@
 export class Task {
     constructor(
-        public title: string,
-        public desc: string,
-        public assignedTo: string,
-        public createdAt: string,
-        public status: string,
-        public id?: string
+        public stackHolder: Array<number>,
+        public name: string,
+        public description: string,
+        // public assignedTo: string,
+        public createDate: string,
+        // public status: string,
+        public id?: string,
+        public createdAt?: Date,
+        public updatedAt?: Date,
+        public tags?: Array<number>
     ){}
 }

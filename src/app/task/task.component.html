@@ -16,12 +16,12 @@
         </thead>
         <tbody id="tbody" *ngFor="let task of allTasks">
             <tr>
-                <td [ngClass]="'task-'+task.status">{{task.title}}</td>
-                <td [ngClass]="'task-'+task.status">{{task.desc}}</td>
-                <td [ngClass]="'task-'+task.status">{{task.assignedTo}}</td>
-                <td [ngClass]="'task-'+task.status">{{task.createdAt}}</td>
-                <td [ngClass]="'task-'+task.status">{{task.status}}</td>
-                <td [ngClass]="'task-'+task.status"> 
+                <td>{{task.name}}</td>
+                <td>{{task.description}}</td>
+                <!-- <td [ngClass]="'task-'+task.status">{{task.assignedTo}}</td> -->
+                <td>{{task.createDate}}</td>
+                <!-- <td [ngClass]="'task-'+task.status">{{task.status}}</td> -->
+                <td> 
                     <button class="btn btn-dark me-3" routerLink="/createTask/{{ task.id }}">Update</button> 
                     <button class="btn btn-danger" (click)="DeleteTask(task.id)">Delete</button>
                 </td>
