@@ -25,6 +25,7 @@ export class LoginComponent {
   }
 
   OnFormSubmitted(form: NgForm){
+    const username = form.value.username;
     const email = form.value.email;
     const password = form.value.password;
 
@@ -45,20 +46,19 @@ export class LoginComponent {
       })
     }
     else{
-      this.authService.signup(email, password).subscribe({
+      this.authService.signup(email, password, username).subscribe({
         next: (res) => { 
-          console.log(res);
-          // this.isLoginMode = true;
-          this.router.navigate(['/home']);
+            console.log(res);
+            this.router.navigate(['/home']);
         },
         error: (errMsg) => { 
-          console.log(errMsg);
-          this.errorMessage = errMsg;
-          setTimeout(() => {
-            this.errorMessage = null;
-          }, 3000); 
+            console.log(errMsg);
+            this.errorMessage = errMsg;
+            setTimeout(() => {
+                this.errorMessage = null;
+            }, 3000); 
         }
-      });
+    });
     }
     form.reset();
   }

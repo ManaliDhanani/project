@@ -21,21 +21,22 @@ import { TaskComponent } from './task/task.component';
 import { CreateComponent } from './task/create/create.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { canActivate } from './RouteGuards/authGuard';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch:'full' },
   // { path: '', redirectTo: 'login', pathMatch:'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'shop', component: ShopComponent },
-  { path: 'shop/details/:id', component:DetailsComponent  },
-  { path: 'about', component: AboutComponent },
-  { path: 'observable', component: ObservableComponent },
-  { path: 'service', component: ServiceComponent },
-  { path: 'task', component: TaskComponent },
-  { path: 'createTask', component: CreateComponent },
-  { path: 'createTask/:id', component: CreateComponent },
-  { path: '**', redirectTo: '', pathMatch:'full' },
+  { path: 'home', component: HomeComponent, canActivate: [canActivate] },
+  { path: 'shop', component: ShopComponent, canActivate: [canActivate] },
+  { path: 'shop/details/:id', component:DetailsComponent, canActivate: [canActivate] },
+  { path: 'about', component: AboutComponent, canActivate: [canActivate] },
+  { path: 'observable', component: ObservableComponent, canActivate: [canActivate] },
+  { path: 'service', component: ServiceComponent, canActivate: [canActivate] },
+  { path: 'task', component: TaskComponent, canActivate: [canActivate] },
+  { path: 'createTask', component: CreateComponent, canActivate: [canActivate] },
+  { path: 'createTask/:id', component: CreateComponent, canActivate: [canActivate] },
+  { path: '**', redirectTo: 'login', pathMatch:'full' },
 ]
 
 @NgModule({

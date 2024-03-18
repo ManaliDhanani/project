@@ -3,6 +3,7 @@ import { Injectable, inject } from "@angular/core";
 import { AuthResponse } from "../Model/AuthResponse";
 import { BehaviorSubject, Subject, catchError, tap, throwError } from "rxjs";
 import { User } from "../Model/User";
+import { Router } from "@angular/router";
 
 
 @Injectable({
@@ -10,11 +11,16 @@ import { User } from "../Model/User";
 })
 
 export class AuthService {
-    http: HttpClient = inject(HttpClient);
+
+    constructor(
+        public http: HttpClient,
+        public router: Router
+    ){}
+    // http: HttpClient = inject(HttpClient);
     user = new BehaviorSubject<User>(null);
 
-    signup(email, password){
-        const data= { email: email, password: password, returnSecureToken: true };
+    signup(email, password, username){
+        const data= { email: email, password: password, displayName: username, returnSecureToken: true };
         return this.http.post<AuthResponse>(
             'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY', 
             data
@@ -26,20 +32,78 @@ export class AuthService {
 
     login(email, password){
         const data= { email: email, password: password, returnSecureToken: true };
-        return this.http.post<AuthResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY', data)
+        return this.http.post<AuthResponse>(
+            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY', 
+            data
+        )
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
         }))
     }
 
+    autoLogin(){
+        const user = JSON.parse(localStorage.getItem('user'));
+        if(!user){
+            return;
+        }
+        const loggedUser = new User(user.email, user.id, user._token, user._expiresIn, user.displayName);
+        if(loggedUser.token){
+            this.user.next(loggedUser);
+        }
+    }
+
+    logout(){
+        this.user.next(null);
+        this.router.navigate(['/login']);
+        localStorage.removeItem('user');
+    }
+
+    // getUserInfo() {
+    //     const user = JSON.parse(localStorage.getItem('user'));
+    //     return { 
+    //       username: user ? user.displayName : null, 
+    //       phoneNumber: user ? user.phoneNumber : null 
+    //     };
+    //   }
+
+    // getUserInfoFromBackend(userId: string){
+    //     return this.http.get<any>(
+    //     `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY/${userId}`
+    //     );
+    // }
+
 
     private handleCreateUser(res){
         const expiresInTs = new Date().getTime() + +res.expiresIn * 1000;
         const expiresIn = new Date(expiresInTs);
-        const user = new User(res.email, res.localId, res.idToken, expiresIn);
+        const user = new User(res.email, res.localId, res.idToken, expiresIn, res.displayName);
         this.user.next(user);
         console.log(this.user);
+        localStorage.setItem('user',JSON.stringify(user));
     }
+
+    // private handleCreateUser(res){
+    //     const expiresInTs = new Date().getTime() + +res.expiresIn * 1000;
+    //     const expiresIn = new Date(expiresInTs);
+    //     const user = new User(res.email, res.localId, res.idToken, expiresIn);
+        
+    //     // Fetch additional user information from backend
+    //     this.getUserInfoFromBackend(res.localId).subscribe((userData) => {
+    //       // Conditionally set username and phoneNumber if available
+    //       if (userData && userData.username) {
+    //         user.username = userData.username;
+    //       }
+    //       if (userData && userData.phoneNumber) {
+    //         user.phoneNumber = userData.phoneNumber;
+    //       }
+    
+    //       // Store the complete user object in localStorage
+    //       localStorage.setItem('user', JSON.stringify(user));
+    
+    //       // Emit the user object to subscribers
+    //       this.user.next(user);
+    //     });
+    // }
 
     private handleError(err){
         let errorMessage = 'An unknown error has occured';

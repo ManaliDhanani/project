@@ -1,12 +1,29 @@
 import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+
+  userName: string;
+  // user: { username: string, phoneNumber: string };
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() {
+
+    const currentUser = this.authService.user.value;
+    this.userName = currentUser ? currentUser.displayName : '';
+    
+    // this.userName = this.authService.user;
+    // console.log("username",this.userName);
+    
+    // this.user = this.authService.getUserInfo();
+  }
 
   username = '';
   emailAddress = '';
@@ -52,7 +69,5 @@ export class HomeComponent {
     this.isAtLeastOneChecked = Object.values(this.selectedValues).some(value => value);
     this.form.control.setValue({ ...this.selectedValues });
   }
-
-  ngOnInit(){ }
 
 }
