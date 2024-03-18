@@ -16,12 +16,11 @@ export class LoginComponent {
   errorMessage: string | null = null;
 
   constructor(public router: Router){}
-
-
+ 
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
   }
-
+  //
   OnFormSubmitted(form: NgForm){
     const username = form.value.username;
     const email = form.value.email;
