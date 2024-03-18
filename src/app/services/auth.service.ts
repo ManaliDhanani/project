@@ -58,20 +58,6 @@ export class AuthService {
         localStorage.removeItem('user');
     }
 
-    // getUserInfo() {
-    //     const user = JSON.parse(localStorage.getItem('user'));
-    //     return { 
-    //       username: user ? user.displayName : null, 
-    //       phoneNumber: user ? user.phoneNumber : null 
-    //     };
-    //   }
-
-    // getUserInfoFromBackend(userId: string){
-    //     return this.http.get<any>(
-    //     `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY/${userId}`
-    //     );
-    // }
-
 
     private handleCreateUser(res){
         const expiresInTs = new Date().getTime() + +res.expiresIn * 1000;
@@ -81,6 +67,7 @@ export class AuthService {
         console.log(this.user);
         localStorage.setItem('user',JSON.stringify(user));
     }
+
 
     // private handleCreateUser(res){
     //     const expiresInTs = new Date().getTime() + +res.expiresIn * 1000;

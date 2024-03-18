@@ -17,8 +17,6 @@ export class CreateComponent {
   selectedTask: Task;
   @ViewChild('taskForm') taskForm: NgForm;
 
-  // taskService: TaskService = inject(TaskService);
-
   constructor(
     public router: Router, 
     public route: ActivatedRoute, 

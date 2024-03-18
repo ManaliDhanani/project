@@ -15,8 +15,6 @@ export class LoginComponent {
   isLoginMode: Boolean = true;
   errorMessage: string | null = null;
 
-  // router: Router = inject(Router);
-
   constructor(public router: Router){}
 
 
