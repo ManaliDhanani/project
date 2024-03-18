@@ -22,6 +22,8 @@ import { CreateComponent } from './task/create/create.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { canActivate } from './RouteGuards/authGuard';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from'@angular/fire/compat/auth';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch:'full' },
@@ -38,6 +40,16 @@ const routes: Routes = [
   { path: 'createTask/:id', component: CreateComponent, canActivate: [canActivate] },
   { path: '**', redirectTo: 'login', pathMatch:'full' },
 ]
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY",
+  authDomain: "angularhttpclient-d6c80.firebaseapp.com",
+  databaseURL: "https://angularhttpclient-d6c80-default-rtdb.firebaseio.com",
+  projectId: "angularhttpclient-d6c80",
+  storageBucket: "angularhttpclient-d6c80.appspot.com",
+  messagingSenderId: "149263745013",
+  appId: "1:149263745013:web:6eaecaf441f81589182abc"
+};
 
 @NgModule({
   declarations: [
@@ -63,7 +75,9 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule
   ],
   providers: [
     SubscribeService

@@ -4,7 +4,8 @@ import { AuthResponse } from "../Model/AuthResponse";
 import { BehaviorSubject, Subject, catchError, tap, throwError } from "rxjs";
 import { User } from "../Model/User";
 import { Router } from "@angular/router";
-
+// import  firebase  from 'firebase/compat/app';
+// import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,8 @@ export class AuthService {
 
     constructor(
         public http: HttpClient,
-        public router: Router
+        public router: Router,
+        // public afAuth: AngularFireAuth
     ){}
     // http: HttpClient = inject(HttpClient);
     user = new BehaviorSubject<User>(null);
@@ -22,8 +24,7 @@ export class AuthService {
     signup(email, password, username){
         const data= { email: email, password: password, displayName: username, returnSecureToken: true };
         return this.http.post<AuthResponse>(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY', 
-            data
+            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY', data
         )
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
@@ -33,8 +34,7 @@ export class AuthService {
     login(email, password){
         const data= { email: email, password: password, returnSecureToken: true };
         return this.http.post<AuthResponse>(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY', 
-            data
+            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY', data
         )
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
@@ -60,8 +60,14 @@ export class AuthService {
 
 
     private handleCreateUser(res){
+        // console.log('res.expiresIn',res.expiresIn);
+        // console.log('res.expiresIn * 1000',res.expiresIn * 1000);
+        // console.log('new Date().getTime()',new Date().getTime());
+        // console.log(new Date(new Date().getTime()));
+        
         const expiresInTs = new Date().getTime() + +res.expiresIn * 1000;
         const expiresIn = new Date(expiresInTs);
+        
         const user = new User(res.email, res.localId, res.idToken, expiresIn, res.displayName);
         this.user.next(user);
         console.log(this.user);
@@ -95,7 +101,6 @@ export class AuthService {
     private handleError(err){
         let errorMessage = 'An unknown error has occured';
         // console.log(err);
-        
         if(!err.error || !err.error.error){
             return throwError(() => errorMessage);
         }
@@ -112,4 +117,15 @@ export class AuthService {
         }
         return throwError(() => errorMessage);
     }
+
+    // async googleSignIn() {
+    //     try {
+    //       const provider = new firebase.default.auth.GoogleAuthProvider();
+    //       const credential = await this.afAuth.signInWithPopup(provider);
+    //       return credential.user;
+    //     } catch (error) {
+    //       console.error('Error during Google sign-in:', error);
+    //       throw error;
+    //     }
+    //   }
 }

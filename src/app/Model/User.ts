@@ -5,8 +5,6 @@ export class User {
         private _token: string,
         private _expiresIn: Date,
         public displayName: string
-        // public username?: string, 
-        // public phoneNumber?: string
     ){}
     get token(){
         if(!this._expiresIn || this._expiresIn < new Date()){
