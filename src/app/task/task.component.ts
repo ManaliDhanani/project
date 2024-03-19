@@ -28,12 +28,12 @@ export class TaskComponent implements OnInit {
     })
   }
 
-  DeleteTask(id: string | undefined){
-    this.taskService.DeleteTask(id);
-  }
+  // DeleteTask(id: string | undefined){
+  //   this.taskService.DeleteTask(id);
+  // }
 
-  DeleteAllTasks(){
-    this.taskService.DeleteAllTasks();
-  }
+  // DeleteAllTasks(){
+  //   this.taskService.DeleteAllTasks();
+  // }
 
 }

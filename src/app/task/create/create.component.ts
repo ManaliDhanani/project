@@ -12,8 +12,8 @@ import { Task } from 'src/app/Model/Task';
 })
 export class CreateComponent {
 
-  public id: string;
   isEditMode: boolean = false;
+  public id: string;
   selectedTask: Task;
   public res: any;
   public tags: any;
@@ -26,15 +26,17 @@ export class CreateComponent {
   ){}
 
   CreateOrUpdateTask(form: NgForm){
-    if(!this.isEditMode){
+    // if(!this.isEditMode){
+      
       console.log("form.value",form.value);
       console.log(typeof form.value.tag);
-      
       this.taskService.CreateTask(form.value); 
-    }
-    else{
-      this.taskService.UpdateTask(this.selectedTask.id, form.value);
-    }
+      
+    
+      // }
+    // else{
+    //   this.taskService.UpdateTask(this.selectedTask.id, form.value);
+    // }
   }
 
   ngOnInit() {
