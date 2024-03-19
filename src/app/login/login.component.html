@@ -4,11 +4,6 @@
     <form class="mt-4 mx-auto" #authForm="ngForm" (ngSubmit)="OnFormSubmitted(authForm)"> 
 
         <div class="err-msg mb-2 text-center">{{ errorMessage }}</div>
-
-        <!-- <mat-form-field appearance="fill">
-            <mat-label>Cities</mat-label>
-            <input type="text" placeholder="city" matInput class="control"/>
-        </mat-form-field> -->
         
         <label *ngIf="!isLoginMode">Username:</label> <br>
         <input *ngIf="!isLoginMode" type="text" name="username" class="form-control shadow-none" placeholder="Username" ngModel required/> <br/>
@@ -20,7 +15,6 @@
         <input type="password" name="password" class="form-control shadow-none" placeholder="Password" minlength="6" ngModel required/> <br/> 
         
         <button mat-raised-button color="primary" type="submit" class="form-control mb-4" [disabled]="!authForm.valid">{{isLoginMode ? 'Login' : 'Signup'}}</button>
-        
         
         <p>{{isLoginMode ? 'Do not have an account yet?' : 'Already have an account?'}}
             <a routerLink="/login" class="text-decoration-none" (click)="onSwitchMode()">{{isLoginMode ? 'Signup' : 'Login'}} Here</a>
