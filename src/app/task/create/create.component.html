@@ -1,21 +1,24 @@
-<h1 class="text-center">{{ isEditMode ? 'Update Task' : 'Create a new Task' }}</h1>
-<form class="mt-4 mx-auto" #taskForm="ngForm" (ngSubmit)="CreateOrUpdateTask(taskForm)"> 
+<h1 class="text-center">{{ isEditMode ? 'Update Task' : 'Add Task' }}</h1>
+<form class="mt-4 mx-auto border border-dark rounded bg-light" #taskForm="ngForm" (ngSubmit)="CreateOrUpdateTask(taskForm)"> 
+    
+    <div class="p-5">
+        <label for="">Name:</label>
+        <input type="text" name="name" class="form-control shadow-none"  placeholder="Name" ngModel required /> <br>
+       
+        <label for="">Description:</label>
+        <input type="text" name="description" class="form-control shadow-none" placeholder="Description" ngModel required /> <br/> 
+    
+        <label for="">Create Date:</label>
+        <input type="date" name="createDate" class="form-control shadow-none" ngModel required /> <br/> 
+    
+        <label for="">Tags:</label>
+        <select class="form-control" name="tag" ngModel required multiple>
+            <option hidden></option>
+            <option value="{{data.id}}" *ngFor="let data of tags">{{data.tag}}</option>
+        </select> <br>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
 
-    <label for="">Title:</label>
-    <input type="text" name="name" class="form-control shadow-none"  placeholder="Title" ngModel required /> <br>
-   
-    <label for="">Description:</label>
-    <input type="text" name="description" class="form-control shadow-none" placeholder="Description" ngModel required /> <br/> 
-
-    <label for="">Created At:</label>
-    <input type="date" name="createDate" class="form-control shadow-none" ngModel required /> <br/> 
-
-    <label for="">Tags:</label>
-    <select class="form-control" name="tag" ngModel required multiple>
-        <option hidden></option>
-        <option value="{{data.id}}" *ngFor="let data of tags">{{data.tag}}</option>
-    </select> <br>
-
-    <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
+    </div>
 
 </form>

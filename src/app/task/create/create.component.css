@@ -17,6 +17,6 @@ small {
     color: rgb(232, 2, 2);
     font-weight: bold;
 }
-.bg-light{
-    font-size: 1.5rem;
+label{
+    font-weight: 500;
 }

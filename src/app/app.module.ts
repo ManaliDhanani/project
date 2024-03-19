@@ -24,6 +24,8 @@ import { LoginComponent } from './login/login.component';
 import { canActivate } from './RouteGuards/authGuard';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from'@angular/fire/compat/auth';
+import { DemoMaterialModule } from './material-module';
+
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch:'full' },
@@ -77,7 +79,8 @@ const firebaseConfig = {
     ReactiveFormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    DemoMaterialModule
   ],
   providers: [
     SubscribeService

@@ -31,7 +31,8 @@ export class LoginComponent {
         next: (res) => { 
           console.log("response",res);
           // 
-          this.router.navigate(['/home']);
+          this.router.navigate(['/createTask']);
+       
         },
         error: (errMsg) => { 
           console.log(errMsg);
@@ -46,7 +47,8 @@ export class LoginComponent {
       this.authService.signup(email, password, username).subscribe({
         next: (res) => { 
             console.log(res);
-            this.router.navigate(['/home']);
+            // this.router.navigate(['/login']);
+            this.isLoginMode = true;
         },
         error: (errMsg) => { 
             console.log(errMsg);

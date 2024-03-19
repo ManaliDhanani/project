@@ -1,4 +1,6 @@
 <div>
+  <!-- <mat-toolbar color="primary">
+    <mat-toolbar-row> -->
     <nav class="navbar navbar-expand-lg bg-dark fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand ms-5 text-white" href="#">Navbar</a>
@@ -18,10 +20,38 @@
             </div>
             <div class="me-5">
               <!-- <button class="btn btn-primary" (click)="onSubscribe()">Subscribe Now</button> -->
-        
 
             </div>
           </div>
         </div>
     </nav>
+  <!-- </mat-toolbar-row>
+  </mat-toolbar> -->
+
+  <!-- <nav class="mat-toolbar mat-primary" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="container-fluid">
+      <a class="navbar-brand ms-5 text-white" routerLink="/">Navbar</a>
+      <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div fxHide.lt-lg>
+        <button mat-button *ngIf="!isLoggedIn" routerLink="/login">Login</button>
+        <button mat-button *ngIf="isLoggedIn" (click)="onLogout()">Logout</button>
+      </div>
+    </div>
+  
+    <div fxShow.lt-lg>
+      <mat-nav-list>
+        <a mat-list-item *ngIf="isLoggedIn" routerLink="home">Home</a>
+        <a mat-list-item *ngIf="isLoggedIn" routerLink="shop">Shop</a>
+        <a mat-list-item *ngIf="isLoggedIn" routerLink="about">About</a>
+        <a mat-list-item *ngIf="isLoggedIn" routerLink="task">Task</a>
+        <a mat-list-item *ngIf="isLoggedIn" routerLink="observable">Observable</a>
+        <a mat-list-item *ngIf="isLoggedIn" routerLink="service">Services</a>
+        <button mat-button *ngIf="!isLoggedIn" routerLink="/login">Login</button>
+        <button mat-button *ngIf="isLoggedIn" (click)="onLogout()">Logout</button>
+      </mat-nav-list>
+    </div>
+  </nav> -->
+  
 </div>
