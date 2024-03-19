@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Router,ActivatedRoute  } from '@angular/router';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/Model/Task';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-create',
@@ -17,6 +18,9 @@ export class CreateComponent {
   selectedTask: Task;
   public res: any;
   public tags: any;
+  public tagId: Array<number> = [];
+  dropdownSettings:IDropdownSettings = {};
+  data: any = [];
   @ViewChild('taskForm') taskForm: NgForm;
 
   constructor(
@@ -27,10 +31,23 @@ export class CreateComponent {
 
   CreateOrUpdateTask(form: NgForm){
     // if(!this.isEditMode){
-      
+      let id: Array<number> = [];
       console.log("form.value",form.value);
-      console.log(typeof form.value.tag);
-      this.taskService.CreateTask(form.value); 
+      for(let tag of form.value.tag){
+        id.push(tag.id);
+      }
+      // let value: Task;
+      let value = {
+        name: form.value.name,
+        description: form.value.description,
+        createDate: form.value.createDate,
+        tag: id
+      };
+      // console.log(value);
+      // console.log("form.value",form.value);
+      
+
+      this.taskService.CreateTask(value); 
       
     
       // }
@@ -42,23 +59,36 @@ export class CreateComponent {
   ngOnInit() {
     this.taskService.fetchAllTags().subscribe((res)=> {
       this.res = res;
-      this.tags = this.res.data;
-      console.log(this.tags);
-      
+      this.tags = this.res.data; 
+
     });
+    this.dropdownSettings = {
+      idField: 'id',
+      textField: 'tag'
+    }
     
-    // this.id = this.route.snapshot.paramMap.get('id');
-    // if(this.route.snapshot.paramMap.get('id')){
-    //   this.isEditMode = true;
-    //   this.taskService.fetchAllTasks().subscribe((tasks)=> {
-    //     for(let task of tasks){
-    //       if(task.id == this.id){
-    //         this.selectedTask = task;
-    //         this.taskForm.form.patchValue(this.selectedTask);
-    //       }
-    //     }     
-    //   })
-    // }  
+    this.id = this.route.snapshot.paramMap.get('id');
+    if(this.route.snapshot.paramMap.get('id')){
+      this.isEditMode = true;
+      this.taskService.fetchAllTasks().subscribe((tasks)=> {
+        this.data = tasks;
+        // console.log(this.data.data);
+        for(let task of this.data.data){
+          if(task.id == this.id){
+            this.selectedTask = task;
+            console.log(this.selectedTask);
+            this.taskForm.form.patchValue(this.selectedTask);
+          }
+        }     
+      })
+    }  
  }
+
+ onItemSelect(item: any) {
+  console.log(item);
+ }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
  
 }

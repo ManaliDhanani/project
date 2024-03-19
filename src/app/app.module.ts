@@ -25,6 +25,7 @@ import { canActivate } from './RouteGuards/authGuard';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from'@angular/fire/compat/auth';
 import { DemoMaterialModule } from './material-module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 const routes: Routes = [
@@ -43,15 +44,15 @@ const routes: Routes = [
   { path: '**', redirectTo: 'login', pathMatch:'full' },
 ]
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY",
-  authDomain: "angularhttpclient-d6c80.firebaseapp.com",
-  databaseURL: "https://angularhttpclient-d6c80-default-rtdb.firebaseio.com",
-  projectId: "angularhttpclient-d6c80",
-  storageBucket: "angularhttpclient-d6c80.appspot.com",
-  messagingSenderId: "149263745013",
-  appId: "1:149263745013:web:6eaecaf441f81589182abc"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY",
+//   authDomain: "angularhttpclient-d6c80.firebaseapp.com",
+//   databaseURL: "https://angularhttpclient-d6c80-default-rtdb.firebaseio.com",
+//   projectId: "angularhttpclient-d6c80",
+//   storageBucket: "angularhttpclient-d6c80.appspot.com",
+//   messagingSenderId: "149263745013",
+//   appId: "1:149263745013:web:6eaecaf441f81589182abc"
+// };
 
 @NgModule({
   declarations: [
@@ -78,9 +79,10 @@ const firebaseConfig = {
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    // AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     SubscribeService

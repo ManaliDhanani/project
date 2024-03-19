@@ -12,10 +12,16 @@
         <input type="date" name="createDate" class="form-control shadow-none" ngModel required /> <br/> 
     
         <label for="">Tags:</label>
-        <select class="form-control shadow-none" name="tag" ngModel required multiple>
-            <option hidden></option>
-            <option value="{{data.id}}" *ngFor="let data of tags">{{data.tag}}</option>
-        </select> <br>
+      
+        <div class="mt-1 bg-white">
+            <ng-multiselect-dropdown
+                [settings]="dropdownSettings"
+                [data]="tags"
+                name="tag"
+                ngModel required>
+            </ng-multiselect-dropdown>
+        </div>
+        <br> 
     
         <button type="submit" mat-raised-button color="primary" [disabled]="!taskForm.valid">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
 

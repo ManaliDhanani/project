@@ -14,7 +14,7 @@
                 <th>Tags</th>
                 <th>User Id</th>
                 <th>Username</th>
-                <!-- <th>Actions</th>  -->
+                <th>Actions</th> 
             </tr>
         </thead>
         <tbody id="tbody" *ngFor="let task of allTasks">
@@ -26,10 +26,10 @@
                 <td>{{task.tags }}</td>
                 <td>{{task.user.id}}</td>
                 <td>{{task.user.name}}</td>
-                <!-- <td> 
-                    <button class="btn btn-dark me-3" routerLink="/createTask/{{ task.id }}">Update</button> 
-                    <button class="btn btn-danger" (click)="DeleteTask(task.id)">Delete</button>
-                </td> -->
+                <td> 
+                    <button mat-raised-button color="warn" routerLink="/createTask/{{ task.id }}">Update</button> 
+                    <!-- <button class="btn btn-danger" (click)="DeleteTask(task.id)">Delete</button> -->
+                </td>
             </tr>
         </tbody>
     </table>
