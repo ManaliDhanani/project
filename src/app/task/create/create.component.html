@@ -12,12 +12,12 @@
         <input type="date" name="createDate" class="form-control shadow-none" ngModel required /> <br/> 
     
         <label for="">Tags:</label>
-        <select class="form-control" name="tag" ngModel required multiple>
+        <select class="form-control shadow-none" name="tag" ngModel required multiple>
             <option hidden></option>
             <option value="{{data.id}}" *ngFor="let data of tags">{{data.tag}}</option>
         </select> <br>
     
-        <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!taskForm.valid">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
 
     </div>
 

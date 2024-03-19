@@ -15,8 +15,9 @@
               <a class="nav-link active me-3 text-white" *ngIf="isLoggedIn" routerLink="task">Task</a>
               <a class="nav-link active me-3 text-white" *ngIf="isLoggedIn" routerLink="observable">Observable</a>
               <a class="nav-link active me-3 text-white" *ngIf="isLoggedIn" routerLink="service">Services</a>
-              <a class="btn btn-primary" *ngIf="!isLoggedIn" routerLink="/login">Login</a>
-              <a class="btn btn-primary" *ngIf="isLoggedIn" (click)="onLogout()">Logout</a>
+              <a mat-raised-button color="accent" class="btn" *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+              <!-- <a class="btn btn-primary" *ngIf="isLoggedIn" (click)="onLogout()">Logout</a> -->
+              <button mat-raised-button color="accent" class="mt-1 button" *ngIf="isLoggedIn" (click)="onLogout()">Logout</button>
             </div>
             <div class="me-5">
               <!-- <button class="btn btn-primary" (click)="onSubscribe()">Subscribe Now</button> -->
