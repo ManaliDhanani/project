@@ -6,21 +6,15 @@
    
     <label for="">Description:</label>
     <input type="text" name="description" class="form-control shadow-none" placeholder="Description" ngModel required /> <br/> 
-    
-    <!-- <label for="">Assigned To:</label>
-    <input type="text" name="assignedTo" class="form-control shadow-none" placeholder="Assigned To" ngModel required /> <br/>  -->
 
     <label for="">Created At:</label>
     <input type="date" name="createDate" class="form-control shadow-none" ngModel required /> <br/> 
 
-    <!-- <label for="">Status:</label>
-    <select class="form-control" name="status" ngModel required>
-        <option hidden>Status</option>
-        <option value="open">Open</option>
-        <option value="started">Started</option>
-        <option value="in-progress">In Progress</option>
-        <option value="complete">Complete</option>
-    </select> <br> -->
+    <label for="">Tags:</label>
+    <select class="form-control" name="tag" ngModel required multiple>
+        <option hidden></option>
+        <option value="{{data.id}}" *ngFor="let data of tags">{{data.tag}}</option>
+    </select> <br>
 
     <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
 

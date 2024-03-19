@@ -15,6 +15,8 @@ export class CreateComponent {
   public id: string;
   isEditMode: boolean = false;
   selectedTask: Task;
+  public res: any;
+  public tags: any;
   @ViewChild('taskForm') taskForm: NgForm;
 
   constructor(
@@ -25,8 +27,10 @@ export class CreateComponent {
 
   CreateOrUpdateTask(form: NgForm){
     if(!this.isEditMode){
-      // const stackHolder: Array<number> = [255];
-      this.taskService.CreateTask(form.value);
+      console.log("form.value",form.value);
+      console.log(typeof form.value.tag);
+      
+      this.taskService.CreateTask(form.value); 
     }
     else{
       this.taskService.UpdateTask(this.selectedTask.id, form.value);
@@ -34,18 +38,25 @@ export class CreateComponent {
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    if(this.route.snapshot.paramMap.get('id')){
-      this.isEditMode = true;
-      this.taskService.fetchAllTasks().subscribe((tasks)=> {
-        for(let task of tasks){
-          if(task.id == this.id){
-            this.selectedTask = task;
-            this.taskForm.form.patchValue(this.selectedTask);
-          }
-        }     
-      })
-    }  
+    this.taskService.fetchAllTags().subscribe((res)=> {
+      this.res = res;
+      this.tags = this.res.data;
+      console.log(this.tags);
+      
+    });
+    
+    // this.id = this.route.snapshot.paramMap.get('id');
+    // if(this.route.snapshot.paramMap.get('id')){
+    //   this.isEditMode = true;
+    //   this.taskService.fetchAllTasks().subscribe((tasks)=> {
+    //     for(let task of tasks){
+    //       if(task.id == this.id){
+    //         this.selectedTask = task;
+    //         this.taskForm.form.patchValue(this.selectedTask);
+    //       }
+    //     }     
+    //   })
+    // }  
  }
  
 }

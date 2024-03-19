@@ -1,11 +1,11 @@
 export class Task {
     constructor(
-        public stackHolder: Array<number>,
+        public stakeHolder: Array<number>,
         public name: string,
         public description: string,
         // public assignedTo: string,
         public createDate: string,
-        // public status: string,
+        public tag?: any,
         public id?: string,
         public createdAt?: Date,
         public updatedAt?: Date,

@@ -12,7 +12,8 @@ export class TaskComponent implements OnInit {
 
   taskService: TaskService = inject(TaskService);
   http: HttpClient = inject(HttpClient);
-  allTasks: Task[] = [];
+  res: any;
+  allTasks: any;
 
   ngOnInit(){
     this.fetchAllTasks();
@@ -21,7 +22,9 @@ export class TaskComponent implements OnInit {
   fetchAllTasks() {
     this.taskService.fetchAllTasks()
     .subscribe((tasks)=> {
-      this.allTasks = tasks;
+      this.res = tasks;
+      this.allTasks = this.res.data;
+      console.log(this.allTasks);
     })
   }
 
