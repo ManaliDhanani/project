@@ -3,13 +3,7 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from "@a
 import { Observable, map } from "rxjs";
 import { AuthService } from "../services/auth.service";
 
-// 
-
-
-export const canActivate = (
-    router: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-): boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> => {
+export const canActivate = () => {
     
     const authService = inject(AuthService);
     const route = inject(Router);
