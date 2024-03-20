@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { AuthResponse } from "../Model/AuthResponse";
 import { BehaviorSubject, Subject, catchError, tap, throwError } from "rxjs";
@@ -15,12 +15,14 @@ export class AuthService {
         public http: HttpClient,
         public router: Router,
     ){}
+    token: any;
     user = new BehaviorSubject<User>(null);
+    httpOptions = {};
 
     signup(email, password, username){
         const data= { email: email, password: password, name: username, returnSecureToken: true };
         return this.http.post<AuthResponse>(
-            'http://192.168.1.61:3000/user/register', data
+            '/user/register', data
         )
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
@@ -30,10 +32,12 @@ export class AuthService {
     login(email, password){
         const data= { email: email, password: password, returnSecureToken: true };
         return this.http.post<AuthResponse>(
-            'http://192.168.1.61:3000/user/login', data
+            '/user/login', data
+            // , { headers: { Authorization: this.token }}
         )
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
+            // console.log(this.token);
         }))
     }
 
@@ -60,6 +64,7 @@ export class AuthService {
         const user = new User(res.data.email , res.data.id, res.token, res.data.name);
         this.user.next(user);
         localStorage.setItem('user',JSON.stringify(user));
+        this.token = res.token;
     }
 
     private handleError(err){
@@ -73,3 +78,4 @@ export class AuthService {
         return throwError(() => err.error.message);
     }
 }
+

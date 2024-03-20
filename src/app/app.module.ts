@@ -19,28 +19,27 @@ import { ShowTaskComponent } from './observable/show-task/show-task.component';
 import { SubjectComponent } from './observable/subject/subject.component';
 import { TaskComponent } from './task/task.component';
 import { CreateComponent } from './task/create/create.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { canActivate } from './RouteGuards/authGuard';
+import { AuthGuard } from './RouteGuards/authGuard';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from'@angular/fire/compat/auth';
 import { DemoMaterialModule } from './material-module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ApiInterceptor } from './services/api-interceptor.service';
 
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'home', pathMatch:'full' },
-  // { path: '', redirectTo: 'login', pathMatch:'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, canActivate: [canActivate] },
-  { path: 'shop', component: ShopComponent, canActivate: [canActivate] },
-  { path: 'shop/details/:id', component:DetailsComponent, canActivate: [canActivate] },
-  { path: 'about', component: AboutComponent, canActivate: [canActivate] },
-  { path: 'observable', component: ObservableComponent, canActivate: [canActivate] },
-  { path: 'service', component: ServiceComponent, canActivate: [canActivate] },
-  { path: 'task', component: TaskComponent, canActivate: [canActivate] },
-  { path: 'createTask', component: CreateComponent, canActivate: [canActivate] },
-  { path: 'createTask/:id', component: CreateComponent, canActivate: [canActivate] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'shop', component: ShopComponent, canActivate: [AuthGuard] },
+  { path: 'shop/details/:id', component:DetailsComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
+  { path: 'observable', component: ObservableComponent, canActivate: [AuthGuard] },
+  { path: 'service', component: ServiceComponent, canActivate: [AuthGuard] },
+  { path: 'task', component: TaskComponent, canActivate: [AuthGuard] },
+  { path: 'createTask', component: CreateComponent, canActivate: [AuthGuard] },
+  { path: 'createTask/:id', component: CreateComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'login', pathMatch:'full' },
 ]
 
@@ -85,7 +84,8 @@ const routes: Routes = [
     NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
-    SubscribeService
+    SubscribeService,
+    {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

@@ -22,6 +22,7 @@ export class CreateComponent {
   dropdownSettings:IDropdownSettings = {};
   data: any = [];
   @ViewChild('taskForm') taskForm: NgForm;
+  selectedTags: any[] = [];
 
   constructor(
     public router: Router, 
@@ -29,23 +30,21 @@ export class CreateComponent {
     public taskService: TaskService
   ){}
 
-  CreateOrUpdateTask(form: NgForm){
+  CreateTask(form: NgForm){
     // if(!this.isEditMode){
+
       let id: Array<number> = [];
       console.log("form.value",form.value);
       for(let tag of form.value.tag){
         id.push(tag.id);
       }
-      // let value: Task;
+  
       let value = {
         name: form.value.name,
         description: form.value.description,
         createDate: form.value.createDate,
         tag: id
       };
-      // console.log(value);
-      // console.log("form.value",form.value);
-      
 
       this.taskService.CreateTask(value); 
       
@@ -57,11 +56,12 @@ export class CreateComponent {
   }
 
   ngOnInit() {
+
     this.taskService.fetchAllTags().subscribe((res)=> {
       this.res = res;
       this.tags = this.res.data; 
-
     });
+
     this.dropdownSettings = {
       idField: 'id',
       textField: 'tag'
@@ -72,23 +72,16 @@ export class CreateComponent {
       this.isEditMode = true;
       this.taskService.fetchAllTasks().subscribe((tasks)=> {
         this.data = tasks;
-        // console.log(this.data.data);
         for(let task of this.data.data){
           if(task.id == this.id){
             this.selectedTask = task;
-            console.log(this.selectedTask);
+            this.selectedTask.tags = this.selectedTask.tags.map(tag => parseInt(tag));
+            this.selectedTags = this.tags.filter(tag => this.selectedTask.tags.includes(tag.id));
             this.taskForm.form.patchValue(this.selectedTask);
           }
         }     
       })
     }  
  }
-
- onItemSelect(item: any) {
-  console.log(item);
- }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
  
 }

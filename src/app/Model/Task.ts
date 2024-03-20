@@ -5,10 +5,10 @@ export class Task {
         public description?: string,
         // public assignedTo: string,
         public createDate?: string,
-        public tag?: any,
+        public tag?: Array<number>,
         public id?: string,
         public createdAt?: Date,
         public updatedAt?: Date,
-        public tags?: Array<number>
+        public tags?: any
     ){}
 }

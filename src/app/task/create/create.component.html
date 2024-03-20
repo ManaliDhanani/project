@@ -1,5 +1,5 @@
 <h1 class="text-center">{{ isEditMode ? 'Update Task' : 'Add Task' }}</h1>
-<form class="mt-4 mx-auto border border-dark rounded bg-light" #taskForm="ngForm" (ngSubmit)="CreateOrUpdateTask(taskForm)"> 
+<form class="mt-4 mx-auto border border-dark rounded bg-light" #taskForm="ngForm" (ngSubmit)="CreateTask(taskForm)"> 
     
     <div class="p-5">
         <label for="">Name:</label>
@@ -18,11 +18,12 @@
                 [settings]="dropdownSettings"
                 [data]="tags"
                 name="tag"
-                ngModel required>
+                [(ngModel)]="selectedTags" 
+                required>
             </ng-multiselect-dropdown>
         </div>
         <br> 
-    
+
         <button type="submit" mat-raised-button color="primary" [disabled]="!taskForm.valid">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
 
     </div>

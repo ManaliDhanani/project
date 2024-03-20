@@ -24,7 +24,6 @@ export class TaskComponent implements OnInit {
     .subscribe((tasks)=> {
       this.res = tasks;
       this.allTasks = this.res.data;
-      console.log(this.allTasks);
     })
   }
 
