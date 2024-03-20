@@ -1,7 +1,23 @@
 <h1 class="text-center">{{ isEditMode ? 'Update Task' : 'Add Task' }}</h1>
-<form class="mt-4 mx-auto border border-dark rounded bg-light" #taskForm="ngForm" (ngSubmit)="CreateTask(taskForm)"> 
+<form class="mt-4 mx-auto rounded border border-dark-subtle bg-light" #taskForm="ngForm" (ngSubmit)="CreateTask(taskForm)"> 
     
     <div class="p-5">
+
+        <!-- <mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input type="text" name="name" ngModel matInput required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Description</mat-label>
+            <input type="text" name="description" ngModel matInput required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Create Date</mat-label>
+            <input type="date" name="createDate" ngModel matInput required>
+        </mat-form-field> -->
+
         <label for="">Name:</label>
         <input type="text" name="name" class="form-control shadow-none"  placeholder="Name" ngModel required /> <br>
        

@@ -11,11 +11,10 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   hideNavbar = true;
-  authService: AuthService = inject(AuthService);
   isLoginMode: Boolean = true;
   errorMessage: string | null = null;
 
-  constructor(public router: Router){}
+  constructor(public router: Router, public authService: AuthService){}
  
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
@@ -47,7 +46,6 @@ export class LoginComponent {
       this.authService.signup(email, password, username).subscribe({
         next: (res) => { 
             console.log(res);
-            // this.router.navigate(['/login']);
             this.isLoginMode = true;
         },
         error: (errMsg) => { 

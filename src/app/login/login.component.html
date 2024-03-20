@@ -1,18 +1,31 @@
 
-<div class="mx-auto bg-light form-section shadow-lg">
+<div class="mx-auto form-section shadow-lg">
     <h2 class="text-center">{{isLoginMode ? 'Login' : 'Signup'}} Here</h2>
-    <form class="mt-4 mx-auto" #authForm="ngForm" (ngSubmit)="OnFormSubmitted(authForm)"> 
+    <form class="mx-auto example-form" #authForm="ngForm" (ngSubmit)="OnFormSubmitted(authForm)"> 
 
         <div class="err-msg mb-2 text-center">{{ errorMessage }}</div>
         
-        <label *ngIf="!isLoginMode">Username:</label> <br>
+        <!-- <label *ngIf="!isLoginMode">Username:</label> <br>
         <input *ngIf="!isLoginMode" type="text" name="username" class="form-control shadow-none" placeholder="Username" ngModel required/> <br/>
    
         <label>Email:</label> <br>
         <input type="email" name="email" class="form-control shadow-none" placeholder="Email Address" ngModel required/> <br/> 
     
         <label>Password:</label> <br>
-        <input type="password" name="password" class="form-control shadow-none" placeholder="Password" minlength="6" ngModel required/> <br/> 
+        <input type="password" name="password" class="form-control shadow-none" placeholder="Password" minlength="6" ngModel required/> <br/>  -->
+        
+        <mat-form-field class="example-full-width" *ngIf="!isLoginMode">
+            <mat-label>Username</mat-label>
+            <input type="text" name="username" ngModel matInput required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" name="email" ngModel matInput required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input type="password" name="password" minlength="6" ngModel matInput required>
+        </mat-form-field>
         
         <button mat-raised-button color="primary" type="submit" class="form-control mb-4" [disabled]="!authForm.valid">{{isLoginMode ? 'Login' : 'Signup'}}</button>
         

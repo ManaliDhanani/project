@@ -2,7 +2,7 @@
     <div class="text-center p-5 mx-auto">
         <button class="btn btn-primary" (click)="onSubscribe()">Subscribe Now</button>
     </div>
-    <form class="mt-5">
+    <!-- <form class="mt-5">
         <mat-card>
             <mat-card-header>
                 <mat-card-title>Profile Information</mat-card-title>
@@ -17,5 +17,24 @@
                 </div>
             </mat-card-content>
         </mat-card>
+    </form> -->
+</div>
+<div>
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Username</mat-label>
+          <input type="text" name="username" ngModel matInput required>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" name="email" ngModel matInput required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" name="password" ngModel matInput required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" class="form-control mb-4">Submit</button>
+
     </form>
 </div>

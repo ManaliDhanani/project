@@ -18,6 +18,7 @@ export class AuthService {
     token: any;
     user = new BehaviorSubject<User>(null);
     httpOptions = {};
+    data:any = {};
 
     signup(email, password, username){
         const data= { email: email, password: password, name: username, returnSecureToken: true };
@@ -33,11 +34,17 @@ export class AuthService {
         const data= { email: email, password: password, returnSecureToken: true };
         return this.http.post<AuthResponse>(
             '/user/login', data
-            // , { headers: { Authorization: this.token }}
         )
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
-            // console.log(this.token);
+            this.data = res;
+            console.log("after login",this.data.token);
+            if (this.data.token) {
+                const headers = new HttpHeaders({
+                  'Authorization_token': this.data.token
+                });
+                this.http.post('/user/login', data, { headers: headers }).subscribe();
+            }
         }))
     }
 
