@@ -42,7 +42,6 @@ export class TaskService {
 
     fetchAllTasks(){
         const currentUser = this.authService.user.value;
-        console.log(currentUser.token);
         return this.http.get(`/task/get`,  {headers: {Authorization_token: currentUser.token}});
     }
 

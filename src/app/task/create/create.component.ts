@@ -22,7 +22,7 @@ export class CreateComponent {
   dropdownSettings:IDropdownSettings = {};
   data: any = [];
   selectedTags: any[] = [];
-  
+
   @ViewChild('taskForm') taskForm: NgForm;
 
   constructor(
@@ -78,6 +78,7 @@ export class CreateComponent {
             this.selectedTask = task;
             this.selectedTask.tags = this.selectedTask.tags.map(tag => parseInt(tag));
             this.selectedTags = this.tags.filter(tag => this.selectedTask.tags.includes(tag.id));
+            console.log(this.tags.filter(tag => this.selectedTask.tags.includes(tag.id)));
             this.taskForm.form.patchValue(this.selectedTask);
           }
         }     
