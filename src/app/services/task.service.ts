@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable, inject } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Task } from "../Model/Task";
 import { Router } from '@angular/router';
 import { AuthService } from "./auth.service";

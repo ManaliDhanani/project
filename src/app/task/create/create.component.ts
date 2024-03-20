@@ -21,8 +21,9 @@ export class CreateComponent {
   public tagId: Array<number> = [];
   dropdownSettings:IDropdownSettings = {};
   data: any = [];
-  @ViewChild('taskForm') taskForm: NgForm;
   selectedTags: any[] = [];
+  
+  @ViewChild('taskForm') taskForm: NgForm;
 
   constructor(
     public router: Router, 
