@@ -19,7 +19,6 @@ export class LoginComponent {
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
   }
-  //
   OnFormSubmitted(form: NgForm){
     const username = form.value.username;
     const email = form.value.email;
@@ -29,9 +28,7 @@ export class LoginComponent {
       this.authService.login(email, password).subscribe({
         next: (res) => { 
           console.log("response",res);
-          // 
           this.router.navigate(['/task']);
-       
         },
         error: (errMsg) => { 
           console.log(errMsg);

@@ -9,6 +9,7 @@ form {
 input.ng-invalid.ng-touched {
     /* border: 1px solid rgb(232, 2, 2); */
     color: red;
+    margin-top: -3rem;
 }
 
 .form-section {
@@ -43,4 +44,8 @@ label {
   
   .example-full-width {
     width: 100%;
+  }
+
+  .hint {
+    font-size: 1rem;
   }

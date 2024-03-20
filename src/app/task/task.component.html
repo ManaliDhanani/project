@@ -3,7 +3,7 @@
     <a mat-raised-button color="primary" class="link" routerLink="/createTask">Create Task</a>
 
     <!-- <button mat-raised-button color="warn" class="delAll" (click)="DeleteAllTasks()">Delete All Tasks</button> -->
-    <table class="table table-bordered border-secondary table-hover mx-auto">
+    <table class="table table-bordered border-secondary table-responsive table-hover mx-auto">
         <thead>
             <tr>
                 <th>Task Id</th>
@@ -26,7 +26,7 @@
                 <td>{{task.user.id}}</td>
                 <td>{{task.user.name}}</td>
                 <td> 
-                    <button mat-raised-button color="warn" routerLink="/createTask/{{ task.id }}">Update</button> 
+                    <button mat-raised-button color="warn" class="mx-3" routerLink="/createTask/{{ task.id }}">Update</button> 
                     
                     <!-- <button class="btn btn-danger" (click)="DeleteTask(task.id)">Delete</button> -->
                 </td>

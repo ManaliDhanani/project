@@ -10,10 +10,10 @@ import { TaskService } from '../services/task.service';
 })
 export class TaskComponent implements OnInit {
 
-  taskService: TaskService = inject(TaskService);
-  http: HttpClient = inject(HttpClient);
   res: any;
   allTasks: any;
+
+  constructor(public taskService: TaskService, public http: HttpClient){}
 
   ngOnInit(){
     this.fetchAllTasks();
@@ -23,7 +23,9 @@ export class TaskComponent implements OnInit {
     this.taskService.fetchAllTasks()
     .subscribe((tasks)=> {
       this.res = tasks;
+      
       this.allTasks = this.res.data;
+      this.allTasks = this.allTasks.sort((a, b) => b.id - a.id);
     })
   }
 
