@@ -46,17 +46,19 @@ export class TaskComponent implements OnInit {
         task.tags = this.allTags.filter(tag => task.tags.includes(tag.id));
         task.stakeHolder = this.allUsers.filter(user => task.stakeHolder.includes(user.id));
       }
-      console.log("All Tasks:",this.allTasks);
+      this.allTasks.reverse();
 
-    })
-
-    
+    }) 
     
   }
 
-  // fetchAllTasks() {
-    
-  // }
+  formatTags(tags: any[]): string {
+    return tags.map(tag => tag.tag).join(', ');
+  }
+
+  formatStakeholders(users: any[]): string {
+    return users.map(user => user.name).join(', ');
+  }
 
   // DeleteTask(id: string | undefined){
   //   this.taskService.DeleteTask(id);
