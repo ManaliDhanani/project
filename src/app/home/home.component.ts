@@ -20,61 +20,48 @@ export class HomeComponent implements OnInit{
     const currentUser = this.authService.user.value;
     console.log(currentUser);
     this.userName = currentUser ? currentUser.name : '';
-    
-    // const currentUser = this.authService.user.value;
-    // console.log("currentUser",currentUser);
-    // // 
-    // this.userName = currentUser ? currentUser.name : '';
-    
-    // this.userName = this.authService.user;
-    // console.log("username",this.userName);
-    
-    // this.user = this.authService.getUserInfo();
   }
 
-  username = '';
-  emailAddress = '';
-  pass = '';
-  gender = '';
-  checkboxValues = ['Reading', 'Singing', 'Dancing'];
-  selectedValues = {};
-  isAtLeastOneChecked = false;
-  selectedCheckValues = [];
-  formSubmitted = false;
+  
+  // username = '';
+  // emailAddress = '';
+  // pass = '';
+  // gender = '';
+  // checkboxValues = ['Reading', 'Singing', 'Dancing'];
+  // selectedValues = {};
+  // isAtLeastOneChecked = false;
+  // selectedCheckValues = [];
+  // formSubmitted = false;
 
-  // @ViewChild('name') tempPara1: ElementRef;
-  // @ViewChild('mail') tempPara2: ElementRef;
-  // @ViewChild('gen') tempPara3: ElementRef;
-  // @ViewChild('check') tempPara4: ElementRef;
 
-  @ViewChild('registrationForm') form: NgForm;
+//   @ViewChild('registrationForm') form: NgForm;
 
-  genders = [
-    {id: 'male', value: 'male', display: 'Male'},
-    {id: 'female', value: 'female', display: 'Female'},
-    {id: 'other', value: 'other', display: 'Other'},
-  ];
+//   genders = [
+//     {id: 'male', value: 'male', display: 'Male'},
+//     {id: 'female', value: 'female', display: 'Female'},
+//     {id: 'other', value: 'other', display: 'Other'},
+//   ];
 
-  onClickSubmit(form: NgForm) {
-    console.log("form",form.value); 
-    this.username = this.form.value.username; 
-    this.emailAddress = this.form.value.email; 
-    this.pass = this.form.value.password;
-    this.gender = this.form.value.gender; 
+//   onClickSubmit(form: NgForm) {
+//     console.log("form",form.value); 
+//     this.username = this.form.value.username; 
+//     this.emailAddress = this.form.value.email; 
+//     this.pass = this.form.value.password;
+//     this.gender = this.form.value.gender; 
     
-    this.selectedCheckValues = Object.keys(this.selectedValues).filter(key => this.selectedValues[key]);
+//     this.selectedCheckValues = Object.keys(this.selectedValues).filter(key => this.selectedValues[key]);
 
-    // const formValue = this.form.value;
-    this.formSubmitted = true; 
-    // console.log(this.username, this.emailAddress, this.pass, this.gender, this.selectedCheckValues);
+//     // const formValue = this.form.value;
+//     this.formSubmitted = true; 
+//     // console.log(this.username, this.emailAddress, this.pass, this.gender, this.selectedCheckValues);
     
 
-    this.form.reset();
- }
+//     this.form.reset();
+//  }
 
-  updateButtonState(){
-    this.isAtLeastOneChecked = Object.values(this.selectedValues).some(value => value);
-    this.form.control.setValue({ ...this.selectedValues });
-  }
+//   updateButtonState(){
+//     this.isAtLeastOneChecked = Object.values(this.selectedValues).some(value => value);
+//     this.form.control.setValue({ ...this.selectedValues });
+//   }
 
 }

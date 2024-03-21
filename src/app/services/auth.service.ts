@@ -15,7 +15,7 @@ export class AuthService {
         public http: HttpClient,
         public router: Router,
     ){}
-    token: any;
+    // token: any;
     user = new BehaviorSubject<User>(null);
     httpOptions = {};
     data:any = {};
@@ -38,7 +38,6 @@ export class AuthService {
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
             this.data = res;
-            console.log("after login",this.data.token);
             if (this.data.token) {
                 const headers = new HttpHeaders({
                   'Authorization_token': this.data.token
@@ -71,7 +70,7 @@ export class AuthService {
         const user = new User(res.data.email , res.data.id, res.token, res.data.name);
         this.user.next(user);
         localStorage.setItem('user',JSON.stringify(user));
-        this.token = res.token;
+        // this.token = res.token;
     }
 
     private handleError(err){

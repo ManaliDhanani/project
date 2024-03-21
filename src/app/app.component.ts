@@ -16,6 +16,7 @@ export class AppComponent implements OnInit{
       this.authService.autoLogin();
   }
 
+  
 //   name = "";
 //   userName = "";
 //   myCSSClass = "red";

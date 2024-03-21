@@ -27,6 +27,7 @@ import { AngularFireAuthModule } from'@angular/fire/compat/auth';
 import { DemoMaterialModule } from './material-module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ApiInterceptor } from './services/api-interceptor.service';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 
 const routes: Routes = [
@@ -85,6 +86,7 @@ const routes: Routes = [
   ],
   providers: [
     SubscribeService,
+    provideAnimations(),
     {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
