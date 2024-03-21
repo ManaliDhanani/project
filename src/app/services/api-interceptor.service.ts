@@ -9,9 +9,9 @@ export class ApiInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    for (const host of environment.hosts) {
+    for (let host of environment.hosts) {
       if (request.url.startsWith(host.prefix)) {
-        const newUrl = request.url.replace(host.prefix, host.target);
+        let newUrl = request.url.replace(host.prefix, host.target);
         request = request.clone({ url: newUrl });
         // break; 
       }
@@ -19,6 +19,8 @@ export class ApiInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 }
+
+
 
 // import { HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 // import { environment } from "src/environments/environment.development";
