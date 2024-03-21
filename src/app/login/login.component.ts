@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -10,19 +10,47 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  authForm: FormGroup;
+  formdata:any = {};
   hideNavbar = true;
   isLoginMode: Boolean = true;
   errorMessage: string | null = null;
 
   constructor(public router: Router, public authService: AuthService){}
+  ngOnInit(){
+    this.authForm = new FormGroup({
+      username: new FormControl(null),
+      email: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required)
+    })
+    this.updateUsernameValidator();
+    
+  }
  
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
+    this.authForm.reset();
+    this.updateUsernameValidator(); 
   }
-  OnFormSubmitted(form: NgForm){
-    const username = form.value.username;
-    const email = form.value.email;
-    const password = form.value.password;
+
+  updateUsernameValidator() {
+    const usernameControl = this.authForm.get('username');
+    if (!this.isLoginMode) {
+      usernameControl.setValidators([Validators.required]);
+    } else {
+      usernameControl.clearValidators();
+    }
+    usernameControl.updateValueAndValidity();
+  }
+
+  OnFormSubmitted(){
+
+    this.formdata = this.authForm.value;
+    console.log(this.formdata);
+    
+    const username = this.formdata.username;
+    const email = this.formdata.email;
+    const password = this.formdata.password;
 
     if(this.isLoginMode){
       this.authService.login(email, password).subscribe({
@@ -54,7 +82,8 @@ export class LoginComponent {
         }
     });
     }
-    form.reset();
+    this.authForm.reset();
   }
-
+  // this is my auth.service.ts file and i have set token with login request 
+//   instead how to create an interceptor file to set token in request header
 }

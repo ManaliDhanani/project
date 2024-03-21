@@ -23,7 +23,7 @@ export class AuthService {
     signup(email, password, username){
         const data= { email: email, password: password, name: username, returnSecureToken: true };
         return this.http.post<AuthResponse>(
-            '/user/register', data
+            'api/user/register', data
         )
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
@@ -33,18 +33,16 @@ export class AuthService {
     login(email, password){
         const data= { email: email, password: password, returnSecureToken: true };
         return this.http.post<AuthResponse>(
-            '/user/login', data
+            'api/user/login', data
         )
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
-            this.data = res;
-            if (this.data.token) {
-                const headers = new HttpHeaders({
-                  'Authorization_token': this.data.token
-                });
-                this.http.post('/user/login', data, { headers: headers }).subscribe();
-            }
         }))
+    }
+
+    getToken(){
+        const user = JSON.parse(localStorage.getItem('user'));
+        return user ? user._token : null;
     }
 
     autoLogin(){
@@ -70,7 +68,6 @@ export class AuthService {
         const user = new User(res.data.email , res.data.id, res.token, res.data.name);
         this.user.next(user);
         localStorage.setItem('user',JSON.stringify(user));
-        // this.token = res.token;
     }
 
     private handleError(err){

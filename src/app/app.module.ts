@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './search/search.component';
 import { AboutComponent } from './about/about.component';
-import { RouterModule, Routes } from '@angular/router';
 import { ShopComponent } from './shop/shop.component';
 import { HomeComponent } from './home/home.component';
 import { DetailsComponent } from './details/details.component';
@@ -21,28 +20,13 @@ import { TaskComponent } from './task/task.component';
 import { CreateComponent } from './task/create/create.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './RouteGuards/authGuard';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from'@angular/fire/compat/auth';
 import { DemoMaterialModule } from './material-module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ApiInterceptor } from './services/api-interceptor.service';
 import { provideAnimations } from '@angular/platform-browser/animations';
-
-
-const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'shop', component: ShopComponent, canActivate: [AuthGuard] },
-  { path: 'shop/details/:id', component:DetailsComponent, canActivate: [AuthGuard] },
-  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
-  { path: 'observable', component: ObservableComponent, canActivate: [AuthGuard] },
-  { path: 'service', component: ServiceComponent, canActivate: [AuthGuard] },
-  { path: 'task', component: TaskComponent, canActivate: [AuthGuard] },
-  { path: 'createTask', component: CreateComponent, canActivate: [AuthGuard] },
-  { path: 'createTask/:id', component: CreateComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'login', pathMatch:'full' },
-]
+import { AuthInterceptor } from './services/auth-interceptor.service';
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyDvaS5zz8c4iSP8YS6BiXbWUMYsFuYwqmY",
@@ -76,18 +60,18 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(routes),
     ReactiveFormsModule,
     HttpClientModule,
     // AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     DemoMaterialModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [
     SubscribeService,
     provideAnimations(),
-    {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

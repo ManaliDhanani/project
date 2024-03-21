@@ -1,7 +1,51 @@
 <h1 class="text-center">{{ isEditMode ? 'Update Task' : 'Add Task' }}</h1>
-<form class="mt-4 mx-auto rounded border border-dark-subtle bg-light" #taskForm="ngForm" (ngSubmit)="CreateTask(taskForm)"> 
+
+
+<form class="mt-4 mx-auto rounded border border-dark-subtle bg-light" [formGroup]="taskForm" (ngSubmit)="CreateTask()"> 
     
     <div class="p-5">
+
+        <label for="">Name:</label>
+        <input type="text" class="form-control shadow-none" formControlName="name"  placeholder="Name"/> <br>
+       
+        <label for="">Description:</label>
+        <input type="text" class="form-control shadow-none" formControlName="description" placeholder="Description" /> <br/> 
+    
+        <label for="">Create Date:</label>
+        <input type="date" class="form-control shadow-none" formControlName="createDate" /> <br/> 
+    
+        <label for="">Tags:</label>
+        <div class="mt-1 bg-white">
+            <ng-multiselect-dropdown
+                [settings]="dropdownSettings"
+                [data]="tags"
+                formControlName="tags"
+                >
+            </ng-multiselect-dropdown>
+        </div>
+        <br> 
+
+        <label for="">Stake Holder:</label>
+        <div class="mt-1 bg-white">
+            <ng-multiselect-dropdown
+                [settings]="stakeHolderSettings"
+                [data]="users"
+                formControlName="stakeHolder"
+                >
+            </ng-multiselect-dropdown>
+        </div>
+        <br>
+
+        <button type="submit" mat-raised-button color="primary" [disabled]="!taskForm.valid">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
+
+    </div>
+
+</form>
+<!-- -->
+
+<!-- <form class="mt-4 mx-auto rounded border border-dark-subtle bg-light" #taskForm="ngForm" (ngSubmit)="CreateTask(taskForm)"> 
+    
+    <div class="p-5"> -->
 
         <!-- <mat-form-field class="example-full-width">
             <mat-label>Name</mat-label>
@@ -18,7 +62,7 @@
             <input type="date" name="createDate" ngModel matInput required>
         </mat-form-field> -->
 
-        <label for="">Name:</label>
+        <!-- <label for="">Name:</label>
         <input type="text" name="name" class="form-control shadow-none"  placeholder="Name" ngModel required /> <br>
        
         <label for="">Description:</label>
@@ -28,7 +72,6 @@
         <input type="date" name="createDate" class="form-control shadow-none" ngModel required /> <br/> 
     
         <label for="">Tags:</label>
-      
         <div class="mt-1 bg-white">
             <ng-multiselect-dropdown
                 [settings]="dropdownSettings"
@@ -40,8 +83,23 @@
         </div>
         <br> 
 
+        <label for="">Stake Holder:</label>
+        <div class="mt-1 bg-white">
+            <ng-multiselect-dropdown
+                [settings]="stakeHolderSettings"
+                [data]="users"
+                name="stakeHolder"
+                [(ngModel)]="selectedStakeHolders"
+                required>
+            </ng-multiselect-dropdown>
+        </div>
+        <br>
+
         <button type="submit" mat-raised-button color="primary" [disabled]="!taskForm.valid">{{ isEditMode ? 'Update Task' : 'Create Task' }}</button>
 
     </div>
 
-</form>
+</form> -->
+
+
+

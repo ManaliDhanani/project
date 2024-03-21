@@ -1,9 +1,41 @@
-
 <div class="mx-auto bg-light form-section shadow-lg">
+    <h2 class="text-center">{{isLoginMode ? 'Login' : 'Signup'}} Here</h2>
+    <form class="mx-auto example-form" [formGroup]="authForm" (ngSubmit)="OnFormSubmitted()"> 
+
+        <div class="err-msg mb-2 text-center">{{ errorMessage }}</div>
+        
+        <mat-form-field appearance="outline" class="example-full-width" *ngIf="!isLoginMode">
+            <mat-label>Username</mat-label>
+            <input type="text" formControlName="username" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" formControlName="email" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input type="password" formControlName="password" #input minlength="6" matInput>
+              <mat-hint align="end" class="hint">{{input.value.length}}/6</mat-hint>
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" type="submit" class="form-control mb-4" [disabled]="!authForm.valid">{{isLoginMode ? 'Login' : 'Signup'}}</button>
+
+        
+        <p>{{isLoginMode ? 'Do not have an account yet?' : 'Already have an account?'}}
+            <a routerLink="/login" class="text-decoration-none" (click)="onSwitchMode()">{{isLoginMode ? 'Signup' : 'Login'}} Here</a>
+        </p>
+    
+    </form>
+    </div>
+
+
+
+
+<!-- <div class="mx-auto bg-light form-section shadow-lg">
     <h2 class="text-center">{{isLoginMode ? 'Login' : 'Signup'}} Here</h2>
     <form class="mx-auto example-form" #authForm="ngForm" (ngSubmit)="OnFormSubmitted(authForm)"> 
 
-        <div class="err-msg mb-2 text-center">{{ errorMessage }}</div>
+        <div class="err-msg mb-2 text-center">{{ errorMessage }}</div> -->
         
         <!-- <label *ngIf="!isLoginMode">Username:</label> <br>
         <input *ngIf="!isLoginMode" type="text" name="username" class="form-control shadow-none" placeholder="Username" ngModel required/> <br/>
@@ -14,7 +46,7 @@
         <label>Password:</label> <br>
         <input type="password" name="password" class="form-control shadow-none" placeholder="Password" minlength="6" ngModel required/> <br/>  -->
         
-        <mat-form-field appearance="outline" class="example-full-width" *ngIf="!isLoginMode">
+        <!-- <mat-form-field appearance="outline" class="example-full-width" *ngIf="!isLoginMode">
             <mat-label>Username</mat-label>
             <input type="text" name="username" ngModel matInput required>
         </mat-form-field>
@@ -35,6 +67,6 @@
         </p>
     
     </form>
-    </div>
+    </div> -->
 
     

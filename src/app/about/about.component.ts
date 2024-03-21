@@ -14,7 +14,7 @@ export class AboutComponent implements OnInit{
   formStatus: string = '';
   formSubmitted = false;
   formdata:any = {};
-  // hobby: FormArray;
+  hobby: FormArray;
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
@@ -36,11 +36,11 @@ export class AboutComponent implements OnInit{
 
     if (e.target.checked) {
       hobby.push(new FormControl(e.target.value));
-      // console.log(hobbies.value);
+      // console.log(hobby.value);
     } else {
       var index = hobby.controls.findIndex(ind => ind.value === e.target.value);
       hobby.removeAt(index);
-      // console.log(hobbies.value);
+      // console.log(hobby.value);
     }
     this.checkboxSelected = hobby.length > 0;
   }
@@ -60,6 +60,8 @@ export class AboutComponent implements OnInit{
 
   OnFormSubmitted(){
     this.formdata = this.reactiveForm.value;
+    console.log(this.formdata);
+    
     this.formSubmitted = true; 
     this.reactiveForm.reset();
     this.checkboxSelected = false;

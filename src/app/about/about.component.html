@@ -32,7 +32,7 @@
     <label>Hobbies:</label> <br>
     <input type="checkbox" id="singing" value="Singing" (change)="onHobbyChange($event)" [checked]="reactiveForm.get('hobbies').value.includes('Singing')" /><label class="me-5 ms-2">Singing</label>
     <input type="checkbox" id="gaming" value="Gaming" (change)="onHobbyChange($event)" [checked]="reactiveForm.get('hobbies').value.includes('Gaming')" /><label class="me-5 ms-2">Gaming</label>
-    <input type="checkbox" id="sports" value="Sports" (change)="onHobbyChange($event)" [checked]="reactiveForm.get('hobbies').value.includes('Singing')" /><label class="me-5 ms-2">Sports</label> <br> <br>
+    <input type="checkbox" id="sports" value="Sports" (change)="onHobbyChange($event)" [checked]="reactiveForm.get('hobbies').value.includes('Sports')" /><label class="me-5 ms-2">Sports</label> <br> <br>
 
     <label>Skills:</label> <br>
     <div class="input-box" formArrayName="skills">

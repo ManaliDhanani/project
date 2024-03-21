@@ -13,23 +13,8 @@ export class TaskService {
     constructor(public router: Router, private http: HttpClient, public authService: AuthService){}
 
     CreateTask(task: Task){
-
-        const currentUser = this.authService.user.value;
         
-        if (!task.stakeHolder) {
-            task.stakeHolder = [];
-        }
-        task.stakeHolder.push(currentUser.id);
-        
-        const result = {
-            name: task.name,
-            description: task.description,
-            createDate: task.createDate,
-            stakeHolder: task.stakeHolder,
-            tags: task.tag
-        };
-
-        this.http.post<{name: string}>(`/task/create`, result)
+        this.http.post('api/task/create', task)
         .subscribe((response) => {
           console.log(response);
           this.router.navigate(['/task']);
@@ -37,12 +22,16 @@ export class TaskService {
     }
  
     fetchAllTags(){
-        return this.http.get(`/tag/get`);
+        return this.http.get('api/tag/get');
     }
 
     fetchAllTasks(){
         const currentUser = this.authService.user.value;
-        return this.http.get(`/task/get`,  {headers: {Authorization_token: currentUser.token}});
+        return this.http.get('api/task/get');
+    }
+
+    fetchAllUsers(){
+        return this.http.get('api/user/get');
     }
 
 
