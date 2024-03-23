@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
-import { Task } from '../Model/Task';
+import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../services/task.service';
 
 @Component({
@@ -54,6 +53,7 @@ export class TaskComponent implements OnInit {
   displayStakeholders(stakeHolders){
     return stakeHolders.map(stakeHolder => stakeHolder.name).join(', ');
   }
+
 
 
   // DeleteTask(id: string | undefined){
