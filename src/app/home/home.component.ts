@@ -1,9 +1,5 @@
-import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { tap } from 'rxjs';
-import { User } from '../Model/User';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,9 +12,7 @@ export class HomeComponent implements OnInit{
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-
     const currentUser = this.authService.user.value;
-    console.log(currentUser);
     this.userName = currentUser ? currentUser.name : '';
   }
 

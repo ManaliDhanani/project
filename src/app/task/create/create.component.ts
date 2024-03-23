@@ -79,7 +79,6 @@ export class CreateComponent {
     });
 
     this.taskService.fetchAllUsers().subscribe((res) => {
-      console.log("users:",res);
       this.userRes = res;
       this.users = this.userRes.data;
     })

@@ -46,7 +46,6 @@ export class LoginComponent {
   OnFormSubmitted(){
 
     this.formdata = this.authForm.value;
-    console.log(this.formdata);
     
     const username = this.formdata.username;
     const email = this.formdata.email;
@@ -84,6 +83,4 @@ export class LoginComponent {
     }
     this.authForm.reset();
   }
-  // this is my auth.service.ts file and i have set token with login request 
-//   instead how to create an interceptor file to set token in request header
 }

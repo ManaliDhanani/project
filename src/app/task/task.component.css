@@ -1,6 +1,5 @@
 .main {
     padding-top: 6rem;
-    padding-left: 3rem;
 }
 .link {
     position: absolute;
@@ -14,7 +13,7 @@
     padding: 0.5rem 1.2rem;
 }
 table {
-    width: 68%;
+    width: 75%;
     font-size: 1.2rem;
     margin-top: 6rem;
 }
@@ -45,3 +44,9 @@ th {
 .task-started {
     background-color: rgb(222, 242, 250);
 }
+
+@media only screen and (max-width: 1400px) {
+    table {
+      width: 90%;
+    }
+  }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpRequest, HttpHandler, HttpInterceptor } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable()
@@ -8,15 +7,14 @@ export class ApiInterceptor implements HttpInterceptor {
 
   constructor() {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(req: HttpRequest<unknown>, next: HttpHandler) {
     for (let host of environment.hosts) {
-      if (request.url.startsWith(host.prefix)) {
-        let newUrl = request.url.replace(host.prefix, host.target);
-        request = request.clone({ url: newUrl });
-        // break; 
+      if (req.url.startsWith(host.prefix)) {
+        let newUrl = req.url.replace(host.prefix, host.target);
+        req = req.clone({ url: newUrl });
       }
     }
-    return next.handle(request);
+    return next.handle(req);
   }
 }
 

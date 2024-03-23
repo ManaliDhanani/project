@@ -21,8 +21,8 @@
                 <td>{{task.name}}</td>
                 <td>{{task.description}}</td>
                 <td>{{task.createDate}}</td>
-                <td>{{ formatTags(task.tags) }}</td>
-                <td>{{ formatStakeholders(task.stakeHolder) }}</td>
+                <td>{{ displayTags(task.tags) }}</td>
+                <td>{{ displayStakeholders(task.stakeHolder) }}</td>
                 <td> 
                     <button mat-raised-button color="warn" class="mx-3" routerLink="/createTask/{{ task.id }}">Update</button> 
                     
