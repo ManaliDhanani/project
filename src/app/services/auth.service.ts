@@ -4,6 +4,7 @@ import { AuthResponse } from "../Model/AuthResponse";
 import { BehaviorSubject, Subject, catchError, tap, throwError } from "rxjs";
 import { User } from "../Model/User";
 import { Router } from "@angular/router";
+let api = "api_url";
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +20,7 @@ export class AuthService {
 
     signup(email, password, username){
         const data= { email: email, password: password, name: username, returnSecureToken: true };
-        return this.http.post<AuthResponse>('api/user/register', data)
+        return this.http.post<AuthResponse>(`${api}/user/register`, data)
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
         }))
@@ -27,7 +28,7 @@ export class AuthService {
 
     login(email, password){
         const data= { email: email, password: password, returnSecureToken: true };
-        return this.http.post<AuthResponse>('api/user/login', data)
+        return this.http.post<AuthResponse>(`${api}/user/login`, data)
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
         }))

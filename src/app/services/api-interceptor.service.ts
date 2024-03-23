@@ -8,6 +8,7 @@ export class ApiInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler) {
+
     for (let host of environment.hosts) {
       if (req.url.startsWith(host.prefix)) {
         let newUrl = req.url.replace(host.prefix, host.target);

@@ -43,7 +43,6 @@ export class CreateComponent {
     
     for(let tag of this.formdata.tags){
       console.log("tag",tag);
-      
       tagId.push(tag.id);
     }
 
@@ -52,14 +51,22 @@ export class CreateComponent {
     }
  
     let value = {
-      name: this.formdata.name,
-      description: this.formdata.description,
-      createDate: this.formdata.createDate,
+      ...this.formdata,
       tags: tagId,
       stakeHolder: stakeHolderId
     };
+    if(this.taskForm.status == 'INVALID'){
+      return;
+    }else{
+      this.taskService.CreateTask(value).subscribe((response) => {
+        console.log(response);
+        this.router.navigate(['/task']);
+      })
+    }
+    
+    
 
-    this.taskService.CreateTask(value); 
+    
       
   }
 

@@ -18,7 +18,7 @@
               <mat-hint align="end" class="hint">{{input.value.length}}/6</mat-hint>
         </mat-form-field>
         
-        <button mat-raised-button color="primary" type="submit" class="form-control mb-4" [disabled]="!authForm.valid">{{isLoginMode ? 'Login' : 'Signup'}}</button>
+        <button mat-raised-button color="primary" type="submit" class="form-control mb-4">{{isLoginMode ? 'Login' : 'Signup'}}</button>
 
         
         <p>{{isLoginMode ? 'Do not have an account yet?' : 'Already have an account?'}}

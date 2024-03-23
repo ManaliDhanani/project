@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { Task } from "../Model/Task";
 import { Router } from '@angular/router';
 import { AuthService } from "./auth.service";
+import { Observable } from "rxjs";
+let api = "api_url";
 
 @Injectable({
     providedIn: 'root'
@@ -12,26 +14,21 @@ export class TaskService {
 
     constructor(public router: Router, private http: HttpClient, public authService: AuthService){}
 
-    CreateTask(task: Task){
-        
-        this.http.post('api/task/create', task)
-        .subscribe((response) => {
-          console.log(response);
-          this.router.navigate(['/task']);
-        })
+    CreateTask(task: Task): Observable<any>{
+        return  this.http.post(`${api}/task/create`, task);
     }
  
     fetchAllTags(){
-        return this.http.get('api/tag/get');
+        return this.http.get(`${api}/tag/get`);
     }
 
     fetchAllTasks(){
         const currentUser = this.authService.user.value;
-        return this.http.get('api/task/get');
+        return this.http.get(`${api}/task/get`);
     }
 
     fetchAllUsers(){
-        return this.http.get('api/user/get');
+        return this.http.get(`${api}/user/get`);
     }
 
 
