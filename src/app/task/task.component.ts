@@ -51,10 +51,10 @@ export class TaskComponent implements OnInit {
     return tags.map(tag => tag.tag).join(', ');
   }
 
-  displayStakeholders(users){
-    return users.map(user => user.name).join(', ');
+  displayStakeholders(stakeHolders){
+    return stakeHolders.map(stakeHolder => stakeHolder.name).join(', ');
   }
-  
+
 
   // DeleteTask(id: string | undefined){
   //   this.taskService.DeleteTask(id);

@@ -15,16 +15,11 @@ export class AuthService {
         public http: HttpClient,
         public router: Router,
     ){}
-    // token: any;
     user = new BehaviorSubject<User>(null);
-    httpOptions = {};
-    data:any = {};
 
     signup(email, password, username){
         const data= { email: email, password: password, name: username, returnSecureToken: true };
-        return this.http.post<AuthResponse>(
-            'api/user/register', data
-        )
+        return this.http.post<AuthResponse>('api/user/register', data)
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
         }))
@@ -32,9 +27,7 @@ export class AuthService {
 
     login(email, password){
         const data= { email: email, password: password, returnSecureToken: true };
-        return this.http.post<AuthResponse>(
-            'api/user/login', data
-        )
+        return this.http.post<AuthResponse>('api/user/login', data)
         .pipe(catchError(this.handleError), tap((res) => {
             this.handleCreateUser(res);
         }))
