@@ -20,21 +20,21 @@ export class LoginComponent {
   ngOnInit(){
     this.authForm = new FormGroup({
       username: new FormControl(null),
-      email: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required)
     })
-    this.updateUsernameValidator();
+    this.validateUsername();
     
   }
  
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
     this.authForm.reset();
-    this.updateUsernameValidator(); 
+    this.validateUsername(); 
   }
 
-  updateUsernameValidator() {
-    const usernameControl = this.authForm.get('username');
+  validateUsername() {
+    let usernameControl = this.authForm.get('username');
     if (!this.isLoginMode) {
       usernameControl.setValidators([Validators.required]);
     } else {
